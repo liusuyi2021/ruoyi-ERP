@@ -1,6 +1,10 @@
 package com.lsy.web.controller.erp;
 
 import java.util.List;
+
+import com.lsy.common.utils.ShiroUtils;
+import com.lsy.erp.materail.domain.DlMaterial;
+import com.lsy.erp.materail.service.IDlMaterialService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,6 +35,8 @@ public class DlDeliveryController extends BaseController
 {
     private String prefix = "erp/delivery";
 
+    @Autowired
+    private IDlMaterialService dlMaterialService;
     @Autowired
     private IDlDeliveryService dlDeliveryService;
 
@@ -72,8 +78,10 @@ public class DlDeliveryController extends BaseController
      * 新增发货管理
      */
     @GetMapping("/add")
-    public String add()
+    public String add(ModelMap mmap)
     {
+        List<DlMaterial> dlMaterials = dlMaterialService.selectDlMaterialList(new DlMaterial());
+        mmap.put("materials", dlMaterials);
         return prefix + "/add";
     }
 
