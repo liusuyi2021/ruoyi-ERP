@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lsy.erp.materail.mapper.DlMaterialMapper">
+
+    <resultMap type="DlMaterial" id="DlMaterialResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="spec"    column="spec"    />
+        <result property="unitPrice"    column="unit_price"    />
+        <result property="basePrice"    column="base_price"    />
+    </resultMap>
+
+    <sql id="selectDlMaterialVo">
+        select id, name, spec, unit_price, base_price from dl_material
+    </sql>
+
+    <select id="selectDlMaterialList" parameterType="DlMaterial" resultMap="DlMaterialResult">
+        <include refid="selectDlMaterialVo"/>
+        <where>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="spec != null  and spec != ''"> and spec = #{spec}</if>
+        </where>
+    </select>
+
+    <select id="selectDlMaterialById" parameterType="Long" resultMap="DlMaterialResult">
+        <include refid="selectDlMaterialVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertDlMaterial" parameterType="DlMaterial" useGeneratedKeys="true" keyProperty="id">
+        insert into dl_material
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">name,</if>
+            <if test="spec != null">spec,</if>
+            <if test="unitPrice != null">unit_price,</if>
+            <if test="basePrice != null">base_price,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">#{name},</if>
+            <if test="spec != null">#{spec},</if>
+            <if test="unitPrice != null">#{unitPrice},</if>
+            <if test="basePrice != null">#{basePrice},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDlMaterial" parameterType="DlMaterial">
+        update dl_material
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null">name = #{name},</if>
+            <if test="spec != null">spec = #{spec},</if>
+            <if test="unitPrice != null">unit_price = #{unitPrice},</if>
+            <if test="basePrice != null">base_price = #{basePrice},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteDlMaterialById" parameterType="Long">
+        delete from dl_material where id = #{id}
+    </delete>
+
+    <delete id="deleteDlMaterialByIds" parameterType="String">
+        delete from dl_material where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

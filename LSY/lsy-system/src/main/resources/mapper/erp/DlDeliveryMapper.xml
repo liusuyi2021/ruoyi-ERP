@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lsy.erp.delivery.mapper.DlDeliveryMapper">
+    
+    <resultMap type="DlDelivery" id="DlDeliveryResult">
+        <result property="id"    column="id"    />
+        <result property="region"    column="region"    />
+        <result property="saler"    column="saler"    />
+        <result property="agenter"    column="agenter"    />
+        <result property="receiver"    column="receiver"    />
+        <result property="trackingNumber"    column="tracking_number"    />
+        <result property="customer"    column="customer"    />
+        <result property="paymentDate"    column="payment_date"    />
+        <result property="materail"    column="materail"    />
+        <result property="spec"    column="spec"    />
+        <result property="orderNumber"    column="order_number"    />
+        <result property="orderUnitPrice"    column="order_unit_price"    />
+        <result property="orderAmount"    column="order_amount"    />
+        <result property="basePrice"    column="base_price"    />
+        <result property="baseAmount"    column="base_amount"    />
+        <result property="taxRate"    column="tax_rate"    />
+        <result property="taxAmount"    column="tax_amount"    />
+        <result property="diffAmount"    column="diff_amount"    />
+        <result property="refundAmount"    column="refund_amount"    />
+        <result property="invoiceProvide"    column="invoice_provide"    />
+        <result property="refundRequestDate"    column="refund_request_date"    />
+        <result property="refundToFactoryDate"    column="refund_to_factory_date"    />
+        <result property="refundDate"    column="refund_date"    />
+        <result property="batchNumber"    column="batch_number"    />
+        <result property="productionDate"    column="production_date"    />
+        <result property="expirationDate"    column="expiration_date"    />
+        <result property="boxNumber"    column="box_number"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectDlDeliveryVo">
+        select id, region, saler, agenter, receiver, tracking_number, customer, payment_date, materail, spec, order_number, order_unit_price, order_amount, base_price, base_amount, tax_rate, tax_amount, diff_amount, refund_amount, invoice_provide, refund_request_date, refund_to_factory_date, refund_date, batch_number, production_date, expiration_date, box_number, remark from dl_delivery
+    </sql>
+
+    <select id="selectDlDeliveryList" parameterType="DlDelivery" resultMap="DlDeliveryResult">
+        <include refid="selectDlDeliveryVo"/>
+        <where>  
+            <if test="region != null  and region != ''"> and region = #{region}</if>
+            <if test="saler != null  and saler != ''"> and saler = #{saler}</if>
+            <if test="agenter != null  and agenter != ''"> and agenter = #{agenter}</if>
+            <if test="receiver != null  and receiver != ''"> and receiver = #{receiver}</if>
+            <if test="trackingNumber != null  and trackingNumber != ''"> and tracking_number = #{trackingNumber}</if>
+            <if test="customer != null  and customer != ''"> and customer = #{customer}</if>
+            <if test="paymentDate != null "> and payment_date = #{paymentDate}</if>
+            <if test="materail != null  and materail != ''"> and materail = #{materail}</if>
+            <if test="spec != null  and spec != ''"> and spec = #{spec}</if>
+            <if test="orderNumber != null "> and order_number = #{orderNumber}</if>
+            <if test="orderUnitPrice != null "> and order_unit_price = #{orderUnitPrice}</if>
+            <if test="orderAmount != null "> and order_amount = #{orderAmount}</if>
+            <if test="basePrice != null "> and base_price = #{basePrice}</if>
+            <if test="baseAmount != null "> and base_amount = #{baseAmount}</if>
+            <if test="taxRate != null "> and tax_rate = #{taxRate}</if>
+            <if test="taxAmount != null "> and tax_amount = #{taxAmount}</if>
+            <if test="diffAmount != null "> and diff_amount = #{diffAmount}</if>
+            <if test="refundAmount != null "> and refund_amount = #{refundAmount}</if>
+            <if test="invoiceProvide != null "> and invoice_provide = #{invoiceProvide}</if>
+            <if test="refundRequestDate != null "> and refund_request_date = #{refundRequestDate}</if>
+            <if test="refundToFactoryDate != null "> and refund_to_factory_date = #{refundToFactoryDate}</if>
+            <if test="refundDate != null "> and refund_date = #{refundDate}</if>
+            <if test="batchNumber != null  and batchNumber != ''"> and batch_number = #{batchNumber}</if>
+            <if test="productionDate != null "> and production_date = #{productionDate}</if>
+            <if test="expirationDate != null "> and expiration_date = #{expirationDate}</if>
+            <if test="boxNumber != null  and boxNumber != ''"> and box_number = #{boxNumber}</if>
+        </where>
+    </select>
+    
+    <select id="selectDlDeliveryById" parameterType="Long" resultMap="DlDeliveryResult">
+        <include refid="selectDlDeliveryVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertDlDelivery" parameterType="DlDelivery" useGeneratedKeys="true" keyProperty="id">
+        insert into dl_delivery
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="region != null">region,</if>
+            <if test="saler != null">saler,</if>
+            <if test="agenter != null">agenter,</if>
+            <if test="receiver != null">receiver,</if>
+            <if test="trackingNumber != null">tracking_number,</if>
+            <if test="customer != null">customer,</if>
+            <if test="paymentDate != null">payment_date,</if>
+            <if test="materail != null">materail,</if>
+            <if test="spec != null">spec,</if>
+            <if test="orderNumber != null">order_number,</if>
+            <if test="orderUnitPrice != null">order_unit_price,</if>
+            <if test="orderAmount != null">order_amount,</if>
+            <if test="basePrice != null">base_price,</if>
+            <if test="baseAmount != null">base_amount,</if>
+            <if test="taxRate != null">tax_rate,</if>
+            <if test="taxAmount != null">tax_amount,</if>
+            <if test="diffAmount != null">diff_amount,</if>
+            <if test="refundAmount != null">refund_amount,</if>
+            <if test="invoiceProvide != null">invoice_provide,</if>
+            <if test="refundRequestDate != null">refund_request_date,</if>
+            <if test="refundToFactoryDate != null">refund_to_factory_date,</if>
+            <if test="refundDate != null">refund_date,</if>
+            <if test="batchNumber != null">batch_number,</if>
+            <if test="productionDate != null">production_date,</if>
+            <if test="expirationDate != null">expiration_date,</if>
+            <if test="boxNumber != null">box_number,</if>
+            <if test="remark != null">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="region != null">#{region},</if>
+            <if test="saler != null">#{saler},</if>
+            <if test="agenter != null">#{agenter},</if>
+            <if test="receiver != null">#{receiver},</if>
+            <if test="trackingNumber != null">#{trackingNumber},</if>
+            <if test="customer != null">#{customer},</if>
+            <if test="paymentDate != null">#{paymentDate},</if>
+            <if test="materail != null">#{materail},</if>
+            <if test="spec != null">#{spec},</if>
+            <if test="orderNumber != null">#{orderNumber},</if>
+            <if test="orderUnitPrice != null">#{orderUnitPrice},</if>
+            <if test="orderAmount != null">#{orderAmount},</if>
+            <if test="basePrice != null">#{basePrice},</if>
+            <if test="baseAmount != null">#{baseAmount},</if>
+            <if test="taxRate != null">#{taxRate},</if>
+            <if test="taxAmount != null">#{taxAmount},</if>
+            <if test="diffAmount != null">#{diffAmount},</if>
+            <if test="refundAmount != null">#{refundAmount},</if>
+            <if test="invoiceProvide != null">#{invoiceProvide},</if>
+            <if test="refundRequestDate != null">#{refundRequestDate},</if>
+            <if test="refundToFactoryDate != null">#{refundToFactoryDate},</if>
+            <if test="refundDate != null">#{refundDate},</if>
+            <if test="batchNumber != null">#{batchNumber},</if>
+            <if test="productionDate != null">#{productionDate},</if>
+            <if test="expirationDate != null">#{expirationDate},</if>
+            <if test="boxNumber != null">#{boxNumber},</if>
+            <if test="remark != null">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDlDelivery" parameterType="DlDelivery">
+        update dl_delivery
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="region != null">region = #{region},</if>
+            <if test="saler != null">saler = #{saler},</if>
+            <if test="agenter != null">agenter = #{agenter},</if>
+            <if test="receiver != null">receiver = #{receiver},</if>
+            <if test="trackingNumber != null">tracking_number = #{trackingNumber},</if>
+            <if test="customer != null">customer = #{customer},</if>
+            <if test="paymentDate != null">payment_date = #{paymentDate},</if>
+            <if test="materail != null">materail = #{materail},</if>
+            <if test="spec != null">spec = #{spec},</if>
+            <if test="orderNumber != null">order_number = #{orderNumber},</if>
+            <if test="orderUnitPrice != null">order_unit_price = #{orderUnitPrice},</if>
+            <if test="orderAmount != null">order_amount = #{orderAmount},</if>
+            <if test="basePrice != null">base_price = #{basePrice},</if>
+            <if test="baseAmount != null">base_amount = #{baseAmount},</if>
+            <if test="taxRate != null">tax_rate = #{taxRate},</if>
+            <if test="taxAmount != null">tax_amount = #{taxAmount},</if>
+            <if test="diffAmount != null">diff_amount = #{diffAmount},</if>
+            <if test="refundAmount != null">refund_amount = #{refundAmount},</if>
+            <if test="invoiceProvide != null">invoice_provide = #{invoiceProvide},</if>
+            <if test="refundRequestDate != null">refund_request_date = #{refundRequestDate},</if>
+            <if test="refundToFactoryDate != null">refund_to_factory_date = #{refundToFactoryDate},</if>
+            <if test="refundDate != null">refund_date = #{refundDate},</if>
+            <if test="batchNumber != null">batch_number = #{batchNumber},</if>
+            <if test="productionDate != null">production_date = #{productionDate},</if>
+            <if test="expirationDate != null">expiration_date = #{expirationDate},</if>
+            <if test="boxNumber != null">box_number = #{boxNumber},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteDlDeliveryById" parameterType="Long">
+        delete from dl_delivery where id = #{id}
+    </delete>
+
+    <delete id="deleteDlDeliveryByIds" parameterType="String">
+        delete from dl_delivery where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

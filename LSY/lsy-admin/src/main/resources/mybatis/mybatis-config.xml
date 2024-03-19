@@ -16,5 +16,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         <!-- 使用驼峰命名法转换字段 -->
 		<!-- <setting name="mapUnderscoreToCamelCase" value="true"/> -->
 	</settings>
-	
+    <typeAliases>
+        <package name="com.lsy.*.*.domain"/> <!--替换成你的项目的实体类的路径(这个配置对于项目来说没有作用，仅仅是写给IDEA上安装的 MyBatis 插件看的，防止标红)-->
+    </typeAliases>
 </configuration>
