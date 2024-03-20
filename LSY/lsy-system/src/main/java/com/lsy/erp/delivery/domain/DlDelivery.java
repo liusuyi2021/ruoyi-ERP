@@ -10,7 +10,7 @@ import com.lsy.common.core.domain.BaseEntity;
 
 /**
  * 发货管理对象 dl_delivery
- * 
+ *
  * @author ruoyi
  * @date 2024-03-19
  */
@@ -52,7 +52,7 @@ public class DlDelivery extends BaseEntity
 
     /** 物料名称 */
     @Excel(name = "物料名称")
-    private String materail;
+    private String material;
 
     /** 规格 */
     @Excel(name = "规格")
@@ -96,7 +96,7 @@ public class DlDelivery extends BaseEntity
 
     /** 是否提供发票 */
     @Excel(name = "是否提供发票")
-    private Integer invoiceProvide;
+    private Boolean invoiceProvide;
 
     /** 返款申请日期 */
     @JsonFormat(pattern = "yyyy-MM-dd")
@@ -131,246 +131,246 @@ public class DlDelivery extends BaseEntity
     @Excel(name = "箱号")
     private String boxNumber;
 
-    public void setId(Long id) 
+    public void setId(Long id)
     {
         this.id = id;
     }
 
-    public Long getId() 
+    public Long getId()
     {
         return id;
     }
-    public void setRegion(String region) 
+    public void setRegion(String region)
     {
         this.region = region;
     }
 
-    public String getRegion() 
+    public String getRegion()
     {
         return region;
     }
-    public void setSaler(String saler) 
+    public void setSaler(String saler)
     {
         this.saler = saler;
     }
 
-    public String getSaler() 
+    public String getSaler()
     {
         return saler;
     }
-    public void setAgenter(String agenter) 
+    public void setAgenter(String agenter)
     {
         this.agenter = agenter;
     }
 
-    public String getAgenter() 
+    public String getAgenter()
     {
         return agenter;
     }
-    public void setReceiver(String receiver) 
+    public void setReceiver(String receiver)
     {
         this.receiver = receiver;
     }
 
-    public String getReceiver() 
+    public String getReceiver()
     {
         return receiver;
     }
-    public void setTrackingNumber(String trackingNumber) 
+    public void setTrackingNumber(String trackingNumber)
     {
         this.trackingNumber = trackingNumber;
     }
 
-    public String getTrackingNumber() 
+    public String getTrackingNumber()
     {
         return trackingNumber;
     }
-    public void setCustomer(String customer) 
+    public void setCustomer(String customer)
     {
         this.customer = customer;
     }
 
-    public String getCustomer() 
+    public String getCustomer()
     {
         return customer;
     }
-    public void setPaymentDate(Date paymentDate) 
+    public void setPaymentDate(Date paymentDate)
     {
         this.paymentDate = paymentDate;
     }
 
-    public Date getPaymentDate() 
+    public Date getPaymentDate()
     {
         return paymentDate;
     }
-    public void setMaterail(String materail) 
-    {
-        this.materail = materail;
+
+    public String getMaterial() {
+        return material;
     }
 
-    public String getMaterail() 
-    {
-        return materail;
+    public void setMaterial(String material) {
+        this.material = material;
     }
-    public void setSpec(String spec) 
+
+    public void setSpec(String spec)
     {
         this.spec = spec;
     }
 
-    public String getSpec() 
+    public String getSpec()
     {
         return spec;
     }
-    public void setOrderNumber(Long orderNumber) 
+    public void setOrderNumber(Long orderNumber)
     {
         this.orderNumber = orderNumber;
     }
 
-    public Long getOrderNumber() 
+    public Long getOrderNumber()
     {
         return orderNumber;
     }
-    public void setOrderUnitPrice(BigDecimal orderUnitPrice) 
+    public void setOrderUnitPrice(BigDecimal orderUnitPrice)
     {
         this.orderUnitPrice = orderUnitPrice;
     }
 
-    public BigDecimal getOrderUnitPrice() 
+    public BigDecimal getOrderUnitPrice()
     {
         return orderUnitPrice;
     }
-    public void setOrderAmount(BigDecimal orderAmount) 
+    public void setOrderAmount(BigDecimal orderAmount)
     {
         this.orderAmount = orderAmount;
     }
 
-    public BigDecimal getOrderAmount() 
+    public BigDecimal getOrderAmount()
     {
         return orderAmount;
     }
-    public void setBasePrice(BigDecimal basePrice) 
+    public void setBasePrice(BigDecimal basePrice)
     {
         this.basePrice = basePrice;
     }
 
-    public BigDecimal getBasePrice() 
+    public BigDecimal getBasePrice()
     {
         return basePrice;
     }
-    public void setBaseAmount(BigDecimal baseAmount) 
+    public void setBaseAmount(BigDecimal baseAmount)
     {
         this.baseAmount = baseAmount;
     }
 
-    public BigDecimal getBaseAmount() 
+    public BigDecimal getBaseAmount()
     {
         return baseAmount;
     }
-    public void setTaxRate(BigDecimal taxRate) 
+    public void setTaxRate(BigDecimal taxRate)
     {
         this.taxRate = taxRate;
     }
 
-    public BigDecimal getTaxRate() 
+    public BigDecimal getTaxRate()
     {
         return taxRate;
     }
-    public void setTaxAmount(BigDecimal taxAmount) 
+    public void setTaxAmount(BigDecimal taxAmount)
     {
         this.taxAmount = taxAmount;
     }
 
-    public BigDecimal getTaxAmount() 
+    public BigDecimal getTaxAmount()
     {
         return taxAmount;
     }
-    public void setDiffAmount(BigDecimal diffAmount) 
+    public void setDiffAmount(BigDecimal diffAmount)
     {
         this.diffAmount = diffAmount;
     }
 
-    public BigDecimal getDiffAmount() 
+    public BigDecimal getDiffAmount()
     {
         return diffAmount;
     }
-    public void setRefundAmount(BigDecimal refundAmount) 
+    public void setRefundAmount(BigDecimal refundAmount)
     {
         this.refundAmount = refundAmount;
     }
 
-    public BigDecimal getRefundAmount() 
+    public BigDecimal getRefundAmount()
     {
         return refundAmount;
     }
-    public void setInvoiceProvide(Integer invoiceProvide) 
+    public void setInvoiceProvide(Boolean invoiceProvide)
     {
         this.invoiceProvide = invoiceProvide;
     }
 
-    public Integer getInvoiceProvide() 
+    public Boolean getInvoiceProvide()
     {
         return invoiceProvide;
     }
-    public void setRefundRequestDate(Date refundRequestDate) 
+    public void setRefundRequestDate(Date refundRequestDate)
     {
         this.refundRequestDate = refundRequestDate;
     }
 
-    public Date getRefundRequestDate() 
+    public Date getRefundRequestDate()
     {
         return refundRequestDate;
     }
-    public void setRefundToFactoryDate(Date refundToFactoryDate) 
+    public void setRefundToFactoryDate(Date refundToFactoryDate)
     {
         this.refundToFactoryDate = refundToFactoryDate;
     }
 
-    public Date getRefundToFactoryDate() 
+    public Date getRefundToFactoryDate()
     {
         return refundToFactoryDate;
     }
-    public void setRefundDate(Date refundDate) 
+    public void setRefundDate(Date refundDate)
     {
         this.refundDate = refundDate;
     }
 
-    public Date getRefundDate() 
+    public Date getRefundDate()
     {
         return refundDate;
     }
-    public void setBatchNumber(String batchNumber) 
+    public void setBatchNumber(String batchNumber)
     {
         this.batchNumber = batchNumber;
     }
 
-    public String getBatchNumber() 
+    public String getBatchNumber()
     {
         return batchNumber;
     }
-    public void setProductionDate(Date productionDate) 
+    public void setProductionDate(Date productionDate)
     {
         this.productionDate = productionDate;
     }
 
-    public Date getProductionDate() 
+    public Date getProductionDate()
     {
         return productionDate;
     }
-    public void setExpirationDate(Date expirationDate) 
+    public void setExpirationDate(Date expirationDate)
     {
         this.expirationDate = expirationDate;
     }
 
-    public Date getExpirationDate() 
+    public Date getExpirationDate()
     {
         return expirationDate;
     }
-    public void setBoxNumber(String boxNumber) 
+    public void setBoxNumber(String boxNumber)
     {
         this.boxNumber = boxNumber;
     }
 
-    public String getBoxNumber() 
+    public String getBoxNumber()
     {
         return boxNumber;
     }
@@ -386,7 +386,7 @@ public class DlDelivery extends BaseEntity
             .append("trackingNumber", getTrackingNumber())
             .append("customer", getCustomer())
             .append("paymentDate", getPaymentDate())
-            .append("materail", getMaterail())
+            .append("materail", getMaterial())
             .append("spec", getSpec())
             .append("orderNumber", getOrderNumber())
             .append("orderUnitPrice", getOrderUnitPrice())

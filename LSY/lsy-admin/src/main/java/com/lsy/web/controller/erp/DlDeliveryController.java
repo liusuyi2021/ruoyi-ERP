@@ -42,8 +42,10 @@ public class DlDeliveryController extends BaseController
 
     @RequiresPermissions("erp:delivery:view")
     @GetMapping()
-    public String delivery()
+    public String delivery(ModelMap mmap)
     {
+        List<DlMaterial> dlMaterials = dlMaterialService.selectDlMaterialList(new DlMaterial());
+        mmap.put("materials", dlMaterials);
         return prefix + "/delivery";
     }
 

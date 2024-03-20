@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lsy.erp.delivery.mapper.DlDeliveryMapper">
-    
+
     <resultMap type="DlDelivery" id="DlDeliveryResult">
         <result property="id"    column="id"    />
         <result property="region"    column="region"    />
@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="trackingNumber"    column="tracking_number"    />
         <result property="customer"    column="customer"    />
         <result property="paymentDate"    column="payment_date"    />
-        <result property="materail"    column="materail"    />
+        <result property="material"    column="material"    />
         <result property="spec"    column="spec"    />
         <result property="orderNumber"    column="order_number"    />
         <result property="orderUnitPrice"    column="order_unit_price"    />
@@ -36,12 +36,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectDlDeliveryVo">
-        select id, region, saler, agenter, receiver, tracking_number, customer, payment_date, materail, spec, order_number, order_unit_price, order_amount, base_price, base_amount, tax_rate, tax_amount, diff_amount, refund_amount, invoice_provide, refund_request_date, refund_to_factory_date, refund_date, batch_number, production_date, expiration_date, box_number, remark from dl_delivery
+        select id, region, saler, agenter, receiver, tracking_number, customer, payment_date, material, spec, order_number, order_unit_price, order_amount, base_price, base_amount, tax_rate, tax_amount, diff_amount, refund_amount, invoice_provide, refund_request_date, refund_to_factory_date, refund_date, batch_number, production_date, expiration_date, box_number, remark from dl_delivery
     </sql>
 
     <select id="selectDlDeliveryList" parameterType="DlDelivery" resultMap="DlDeliveryResult">
         <include refid="selectDlDeliveryVo"/>
-        <where>  
+        <where>
             <if test="region != null  and region != ''"> and region = #{region}</if>
             <if test="saler != null  and saler != ''"> and saler = #{saler}</if>
             <if test="agenter != null  and agenter != ''"> and agenter = #{agenter}</if>
@@ -49,7 +49,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="trackingNumber != null  and trackingNumber != ''"> and tracking_number = #{trackingNumber}</if>
             <if test="customer != null  and customer != ''"> and customer = #{customer}</if>
             <if test="paymentDate != null "> and payment_date = #{paymentDate}</if>
-            <if test="materail != null  and materail != ''"> and materail = #{materail}</if>
+            <if test="material != null  and material != ''"> and material = #{material}</if>
             <if test="spec != null  and spec != ''"> and spec = #{spec}</if>
             <if test="orderNumber != null "> and order_number = #{orderNumber}</if>
             <if test="orderUnitPrice != null "> and order_unit_price = #{orderUnitPrice}</if>
@@ -70,12 +70,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="boxNumber != null  and boxNumber != ''"> and box_number = #{boxNumber}</if>
         </where>
     </select>
-    
+
     <select id="selectDlDeliveryById" parameterType="Long" resultMap="DlDeliveryResult">
         <include refid="selectDlDeliveryVo"/>
         where id = #{id}
     </select>
-        
+
     <insert id="insertDlDelivery" parameterType="DlDelivery" useGeneratedKeys="true" keyProperty="id">
         insert into dl_delivery
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -86,7 +86,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="trackingNumber != null">tracking_number,</if>
             <if test="customer != null">customer,</if>
             <if test="paymentDate != null">payment_date,</if>
-            <if test="materail != null">materail,</if>
+            <if test="material != null">material,</if>
             <if test="spec != null">spec,</if>
             <if test="orderNumber != null">order_number,</if>
             <if test="orderUnitPrice != null">order_unit_price,</if>
@@ -115,7 +115,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="trackingNumber != null">#{trackingNumber},</if>
             <if test="customer != null">#{customer},</if>
             <if test="paymentDate != null">#{paymentDate},</if>
-            <if test="materail != null">#{materail},</if>
+            <if test="material != null">#{material},</if>
             <if test="spec != null">#{spec},</if>
             <if test="orderNumber != null">#{orderNumber},</if>
             <if test="orderUnitPrice != null">#{orderUnitPrice},</if>
@@ -148,7 +148,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="trackingNumber != null">tracking_number = #{trackingNumber},</if>
             <if test="customer != null">customer = #{customer},</if>
             <if test="paymentDate != null">payment_date = #{paymentDate},</if>
-            <if test="materail != null">materail = #{materail},</if>
+            <if test="material != null">material = #{material},</if>
             <if test="spec != null">spec = #{spec},</if>
             <if test="orderNumber != null">order_number = #{orderNumber},</if>
             <if test="orderUnitPrice != null">order_unit_price = #{orderUnitPrice},</if>
@@ -177,7 +177,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteDlDeliveryByIds" parameterType="String">
-        delete from dl_delivery where id in 
+        delete from dl_delivery where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

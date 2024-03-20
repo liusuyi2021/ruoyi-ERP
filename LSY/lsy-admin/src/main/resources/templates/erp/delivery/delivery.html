@@ -34,86 +34,7 @@
                                 <label>客户名称：</label>
                                 <input type="text" name="customer"/>
                             </li>
-                            <li>
-                                <label>付款日期：</label>
-                                <input type="text" class="time-input" placeholder="请选择付款日期" name="paymentDate"/>
-                            </li>
-                            <li>
-                                <label>物料名称：</label>
-                                <input type="text" name="materail"/>
-                            </li>
-                            <li>
-                                <label>规格：</label>
-                                <input type="text" name="spec"/>
-                            </li>
-                            <li>
-                                <label>订单数量：</label>
-                                <input type="text" name="orderNumber"/>
-                            </li>
-                            <li>
-                                <label>订单单价：</label>
-                                <input type="text" name="orderUnitPrice"/>
-                            </li>
-                            <li>
-                                <label>订单金额：</label>
-                                <input type="text" name="orderAmount"/>
-                            </li>
-                            <li>
-                                <label>底价：</label>
-                                <input type="text" name="basePrice"/>
-                            </li>
-                            <li>
-                                <label>底价金额：</label>
-                                <input type="text" name="baseAmount"/>
-                            </li>
-                            <li>
-                                <label>税率：</label>
-                                <input type="text" name="taxRate"/>
-                            </li>
-                            <li>
-                                <label>税金：</label>
-                                <input type="text" name="taxAmount"/>
-                            </li>
-                            <li>
-                                <label>差额：</label>
-                                <input type="text" name="diffAmount"/>
-                            </li>
-                            <li>
-                                <label>返款金额：</label>
-                                <input type="text" name="refundAmount"/>
-                            </li>
-                            <li>
-                                <label>是否提供发票：</label>
-                                <input type="text" name="invoiceProvide"/>
-                            </li>
-                            <li>
-                                <label>返款申请日期：</label>
-                                <input type="text" class="time-input" placeholder="请选择返款申请日期" name="refundRequestDate"/>
-                            </li>
-                            <li>
-                                <label>返款发工厂日期：</label>
-                                <input type="text" class="time-input" placeholder="请选择返款发工厂日期" name="refundToFactoryDate"/>
-                            </li>
-                            <li>
-                                <label>返款日期：</label>
-                                <input type="text" class="time-input" placeholder="请选择返款日期" name="refundDate"/>
-                            </li>
-                            <li>
-                                <label>批号：</label>
-                                <input type="text" name="batchNumber"/>
-                            </li>
-                            <li>
-                                <label>生产日期：</label>
-                                <input type="text" class="time-input" placeholder="请选择生产日期" name="productionDate"/>
-                            </li>
-                            <li>
-                                <label>有效期：</label>
-                                <input type="text" class="time-input" placeholder="请选择有效期" name="expirationDate"/>
-                            </li>
-                            <li>
-                                <label>箱号：</label>
-                                <input type="text" name="boxNumber"/>
-                            </li>
+
                             <li>
                                 <a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
                                 <a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
@@ -147,7 +68,9 @@
         var editFlag = [[${@permission.hasPermi('erp:delivery:edit')}]];
         var removeFlag = [[${@permission.hasPermi('erp:delivery:remove')}]];
         var prefix = ctx + "erp/delivery";
-
+        var materials = [[${materials}]];
+        var specs = [[${@dict.getType('m_spec')}]];
+        var provideDics = [[${@dict.getType('invoice_provide')}]];
         $(function() {
             var options = {
                 url: prefix + "/list",
@@ -182,7 +105,8 @@
                 },
                 {
                     field: 'trackingNumber',
-                    title: '物流单号'
+                    title: '物流单号',
+                    visible: false
                 },
                 {
                     field: 'customer',
@@ -193,12 +117,19 @@
                     title: '付款日期'
                 },
                 {
-                    field: 'materail',
-                    title: '物料名称'
+                    field: 'material',
+                    title: '物料名称',
+                    formatter: function(value, row, index) {
+                        console.log(materials);
+                        return $.table.selectMatrialName(materials, value);
+                    }
                 },
                 {
                     field: 'spec',
-                    title: '规格'
+                    title: '规格',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(specs, value);
+                    }
                 },
                 {
                     field: 'orderNumber',
@@ -206,39 +137,50 @@
                 },
                 {
                     field: 'orderUnitPrice',
-                    title: '订单单价'
+                    title: '订单单价',
+                    visible: false
                 },
                 {
                     field: 'orderAmount',
-                    title: '订单金额'
+                    title: '订单金额',
+                    visible: false
                 },
                 {
                     field: 'basePrice',
-                    title: '底价'
+                    title: '底价',
+                    visible: false
                 },
                 {
                     field: 'baseAmount',
-                    title: '底价金额'
+                    title: '底价金额',
+                    visible: false
                 },
                 {
                     field: 'taxRate',
-                    title: '税率'
+                    title: '税率',
+                    visible: false
                 },
                 {
                     field: 'taxAmount',
-                    title: '税金'
+                    title: '税金',
+                    visible: false
                 },
                 {
                     field: 'diffAmount',
-                    title: '差额'
+                    title: '差额',
+                    visible: false
                 },
                 {
                     field: 'refundAmount',
-                    title: '返款金额'
+                    title: '返款金额',
+                    visible: false
                 },
                 {
                     field: 'invoiceProvide',
-                    title: '是否提供发票'
+                    title: '发票',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(provideDics, value);
+                    }
                 },
                 {
                     field: 'refundRequestDate',
@@ -270,7 +212,8 @@
                 },
                 {
                     field: 'remark',
-                    title: '备注'
+                    title: '备注',
+                    visible: false
                 },
                 {
                     title: '操作',

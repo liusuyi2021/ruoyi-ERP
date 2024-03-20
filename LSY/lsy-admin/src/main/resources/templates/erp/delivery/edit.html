@@ -1,244 +1,326 @@
 <!DOCTYPE html>
-<html lang="zh" xmlns:th="http://www.thymeleaf.org" >
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <th:block th:include="include :: header('修改发货管理')" />
-    <th:block th:include="include :: datetimepicker-css" />
+    <th:block th:include="include :: header('修改发货管理')"/>
+    <th:block th:include="include :: datetimepicker-css"/>
 </head>
 <body class="white-bg">
-    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
-        <form class="form-horizontal m" id="form-delivery-edit" th:object="${dlDelivery}">
-            <input name="id" th:field="*{id}" type="hidden">
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">省份：</label>
-                <div class="col-sm-8">
-                    <input name="region" th:field="*{region}" class="form-control" type="text">
-                </div>
+<div class="wrapper wrapper-content animated fadeInRight ibox-content">
+    <form class="form-horizontal m" id="form-delivery-edit" th:object="${dlDelivery}">
+        <input name="id" th:field="*{id}" type="hidden">
+        <div class="form-group">
+            <label class="col-sm-3 control-label">省份：</label>
+            <div class="col-sm-3">
+                <input name="region" th:field="*{region}" class="form-control" type="text">
             </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">业务员：</label>
-                <div class="col-sm-8">
-                    <input name="saler" th:field="*{saler}" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">代理人：</label>
-                <div class="col-sm-8">
-                    <input name="agenter" th:field="*{agenter}" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">收货人：</label>
-                <div class="col-sm-8">
-                    <input name="receiver" th:field="*{receiver}" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">物流单号：</label>
-                <div class="col-sm-8">
-                    <input name="trackingNumber" th:field="*{trackingNumber}" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">客户名称：</label>
-                <div class="col-sm-8">
-                    <input name="customer" th:field="*{customer}" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">付款日期：</label>
-                <div class="col-sm-8">
-                    <div class="input-group date">
-                        <input name="paymentDate" th:value="${#dates.format(dlDelivery.paymentDate, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
-                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">物料名称：</label>
-                <div class="col-sm-8">
-                    <input name="materail" th:field="*{materail}" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">规格：</label>
-                <div class="col-sm-8">
-                    <input name="spec" th:field="*{spec}" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">订单数量：</label>
-                <div class="col-sm-8">
-                    <input name="orderNumber" th:field="*{orderNumber}" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">订单单价：</label>
-                <div class="col-sm-8">
-                    <input name="orderUnitPrice" th:field="*{orderUnitPrice}" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">订单金额：</label>
-                <div class="col-sm-8">
-                    <input name="orderAmount" th:field="*{orderAmount}" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">底价：</label>
-                <div class="col-sm-8">
-                    <input name="basePrice" th:field="*{basePrice}" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">底价金额：</label>
-                <div class="col-sm-8">
-                    <input name="baseAmount" th:field="*{baseAmount}" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">税率：</label>
-                <div class="col-sm-8">
-                    <input name="taxRate" th:field="*{taxRate}" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">税金：</label>
-                <div class="col-sm-8">
-                    <input name="taxAmount" th:field="*{taxAmount}" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">差额：</label>
-                <div class="col-sm-8">
-                    <input name="diffAmount" th:field="*{diffAmount}" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">返款金额：</label>
-                <div class="col-sm-8">
-                    <input name="refundAmount" th:field="*{refundAmount}" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">是否提供发票：</label>
-                <div class="col-sm-8">
-                    <input name="invoiceProvide" th:field="*{invoiceProvide}" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">返款申请日期：</label>
-                <div class="col-sm-8">
-                    <div class="input-group date">
-                        <input name="refundRequestDate" th:value="${#dates.format(dlDelivery.refundRequestDate, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
-                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">返款发工厂日期：</label>
-                <div class="col-sm-8">
-                    <div class="input-group date">
-                        <input name="refundToFactoryDate" th:value="${#dates.format(dlDelivery.refundToFactoryDate, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
-                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">返款日期：</label>
-                <div class="col-sm-8">
-                    <div class="input-group date">
-                        <input name="refundDate" th:value="${#dates.format(dlDelivery.refundDate, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
-                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">批号：</label>
-                <div class="col-sm-8">
-                    <input name="batchNumber" th:field="*{batchNumber}" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">生产日期：</label>
-                <div class="col-sm-8">
-                    <div class="input-group date">
-                        <input name="productionDate" th:value="${#dates.format(dlDelivery.productionDate, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
-                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">有效期：</label>
-                <div class="col-sm-8">
-                    <div class="input-group date">
-                        <input name="expirationDate" th:value="${#dates.format(dlDelivery.expirationDate, 'yyyy-MM-dd')}" class="form-control" placeholder="yyyy-MM-dd" type="text">
-                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">箱号：</label>
-                <div class="col-sm-8">
-                    <input name="boxNumber" th:field="*{boxNumber}" class="form-control" type="text">
-                </div>
-            </div>
-            <div class="form-group">    
-                <label class="col-sm-3 control-label">备注：</label>
-                <div class="col-sm-8">
-                    <input name="remark" th:field="*{remark}" class="form-control" type="text">
-                </div>
-            </div>
-        </form>
-    </div>
-    <th:block th:include="include :: footer" />
-    <th:block th:include="include :: datetimepicker-js" />
-    <script th:inline="javascript">
-        var prefix = ctx + "erp/delivery";
-        $("#form-delivery-edit").validate({
-            focusCleanup: true
-        });
 
-        function submitHandler() {
-            if ($.validate.form()) {
-                $.operate.save(prefix + "/edit", $('#form-delivery-edit').serialize());
-            }
+            <label class="col-sm-2 control-label">业务员：</label>
+            <div class="col-sm-3">
+                <input name="saler" th:field="*{saler}" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">代理人：</label>
+            <div class="col-sm-3">
+                <input name="agenter" th:field="*{agenter}" class="form-control" type="text">
+            </div>
+            <label class="col-sm-2 control-label">收货人：</label>
+            <div class="col-sm-3">
+                <input name="receiver" th:field="*{receiver}" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">物流单号：</label>
+            <div class="col-sm-3">
+                <input name="trackingNumber" th:field="*{trackingNumber}" class="form-control" type="text">
+            </div>
+
+            <label class="col-sm-2 control-label">客户名称：</label>
+            <div class="col-sm-3">
+                <input name="customer" th:field="*{customer}" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">付款日期：</label>
+            <div class="col-sm-8">
+                <div class="input-group date">
+                    <input name="paymentDate" th:value="${#dates.format(dlDelivery.paymentDate, 'yyyy-MM-dd')}"
+                           class="form-control" placeholder="yyyy-MM-dd" type="text">
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">物料名称：</label>
+            <div class="col-sm-3">
+                <select id="material" name="material" class="form-control m-b">
+                    <option th:each="material:${materials}" th:value="${material.id}"
+                            th:text="${material.name}"></option>
+                </select>
+            </div>
+            <label class="col-sm-2 control-label">规格：</label>
+            <div class="col-sm-3">
+                <input name="spec" th:field="*{spec}" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">订单数量：</label>
+            <div class="col-sm-8">
+                <input name="orderNumber" th:field="*{orderNumber}" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">订单单价：</label>
+            <div class="col-sm-3">
+                <input name="orderUnitPrice" th:field="*{orderUnitPrice}" class="form-control" type="text">
+            </div>
+
+            <label class="col-sm-2 control-label">订单金额：</label>
+            <div class="col-sm-3">
+                <input name="orderAmount" th:field="*{orderAmount}" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">底价：</label>
+            <div class="col-sm-3">
+                <input name="basePrice" th:field="*{basePrice}" class="form-control" type="text">
+            </div>
+
+            <label class="col-sm-2 control-label">底价金额：</label>
+            <div class="col-sm-3">
+                <input name="baseAmount" th:field="*{baseAmount}" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">税率：</label>
+            <div class="col-sm-3">
+                <input id="taxRate" name="taxRate" th:field="*{taxRate}" class="form-control" type="text">
+            </div>
+            <label class="col-sm-2 control-label">税金：</label>
+            <div class="col-sm-3">
+                <input id="taxAmount" name="taxAmount" th:field="*{taxAmount}" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">差额：</label>
+            <div class="col-sm-3">
+                <input name="diffAmount" th:field="*{diffAmount}" class="form-control" type="text">
+            </div>
+            <label class="col-sm-2 control-label">返款金额：</label>
+            <div class="col-sm-3">
+                <input name="refundAmount" th:field="*{refundAmount}" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">发票：</label>
+            <div class="col-sm-3">
+                <div class="checkbox check-box">
+                    <input type="hidden" name="invoiceProvide" value="1"> <!-- 隐藏的 input 元素，初始值为 0 -->
+                    <input type="checkbox" name="invoiceProvide_checkbox" id="invoiceProvide"
+                           th:field="*{invoiceProvide}"/>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">返款申请日期：</label>
+            <div class="col-sm-8">
+                <div class="input-group date">
+                    <input name="refundRequestDate"
+                           th:value="${#dates.format(dlDelivery.refundRequestDate, 'yyyy-MM-dd')}" class="form-control"
+                           placeholder="yyyy-MM-dd" type="text">
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">返款发工厂日期：</label>
+            <div class="col-sm-8">
+                <div class="input-group date">
+                    <input name="refundToFactoryDate"
+                           th:value="${#dates.format(dlDelivery.refundToFactoryDate, 'yyyy-MM-dd')}"
+                           class="form-control" placeholder="yyyy-MM-dd" type="text">
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">返款日期：</label>
+            <div class="col-sm-8">
+                <div class="input-group date">
+                    <input name="refundDate" th:value="${#dates.format(dlDelivery.refundDate, 'yyyy-MM-dd')}"
+                           class="form-control" placeholder="yyyy-MM-dd" type="text">
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">批号：</label>
+            <div class="col-sm-8">
+                <input name="batchNumber" th:field="*{batchNumber}" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">生产日期：</label>
+            <div class="col-sm-8">
+                <div class="input-group date">
+                    <input name="productionDate" th:value="${#dates.format(dlDelivery.productionDate, 'yyyy-MM-dd')}"
+                           class="form-control" placeholder="yyyy-MM-dd" type="text">
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">有效期：</label>
+            <div class="col-sm-8">
+                <div class="input-group date">
+                    <input name="expirationDate" th:value="${#dates.format(dlDelivery.expirationDate, 'yyyy-MM-dd')}"
+                           class="form-control" placeholder="yyyy-MM-dd" type="text">
+                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">箱号：</label>
+            <div class="col-sm-8">
+                <input name="boxNumber" th:field="*{boxNumber}" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">备注：</label>
+            <div class="col-sm-8">
+                <input name="remark" th:field="*{remark}" class="form-control" type="text">
+            </div>
+        </div>
+    </form>
+</div>
+<th:block th:include="include :: footer"/>
+<th:block th:include="include :: datetimepicker-js"/>
+<script th:inline="javascript">
+    var prefix = ctx + "erp/delivery";
+    $("#form-delivery-edit").validate({
+        focusCleanup: true
+    });
+
+    function submitHandler() {
+        if ($.validate.form()) {
+            $.operate.save(prefix + "/edit", $('#form-delivery-edit').serialize());
         }
+    }
 
-        $("input[name='paymentDate']").datetimepicker({
-            format: "yyyy-mm-dd",
-            minView: "month",
-            autoclose: true
-        });
+    $("input[name='paymentDate']").datetimepicker({
+        format: "yyyy-mm-dd",
+        minView: "month",
+        autoclose: true
+    });
 
-        $("input[name='refundRequestDate']").datetimepicker({
-            format: "yyyy-mm-dd",
-            minView: "month",
-            autoclose: true
-        });
+    $("input[name='refundRequestDate']").datetimepicker({
+        format: "yyyy-mm-dd",
+        minView: "month",
+        autoclose: true
+    });
 
-        $("input[name='refundToFactoryDate']").datetimepicker({
-            format: "yyyy-mm-dd",
-            minView: "month",
-            autoclose: true
-        });
+    $("input[name='refundToFactoryDate']").datetimepicker({
+        format: "yyyy-mm-dd",
+        minView: "month",
+        autoclose: true
+    });
 
-        $("input[name='refundDate']").datetimepicker({
-            format: "yyyy-mm-dd",
-            minView: "month",
-            autoclose: true
-        });
+    $("input[name='refundDate']").datetimepicker({
+        format: "yyyy-mm-dd",
+        minView: "month",
+        autoclose: true
+    });
 
-        $("input[name='productionDate']").datetimepicker({
-            format: "yyyy-mm-dd",
-            minView: "month",
-            autoclose: true
-        });
+    $("input[name='productionDate']").datetimepicker({
+        format: "yyyy-mm-dd",
+        minView: "month",
+        autoclose: true
+    });
 
-        $("input[name='expirationDate']").datetimepicker({
-            format: "yyyy-mm-dd",
-            minView: "month",
-            autoclose: true
+    $("input[name='expirationDate']").datetimepicker({
+        format: "yyyy-mm-dd",
+        minView: "month",
+        autoclose: true
+    });
+
+    $("#invoiceProvide").change(function () {
+        if (this.checked) {
+            $("input[name='invoiceProvide']").val(1);  // 勾选时值为 1
+        } else {
+            $("input[name='invoiceProvide']").val(0); // 不勾选时值为 0
+        }
+    });
+
+    // 获取物料选择框和规格输入框的元素
+    var materials = [[${materials}]];
+    var specs = [[${@dict.getType('m_spec')}]];
+
+    // 监听物料选择框的变化事件
+    $("#material").change(function () {
+        var selectedMaterial = materials.find(function (material) {
+            return material.id == $("#material").val();
         });
-    </script>
+        if (selectedMaterial !== undefined && selectedMaterial.spec !== undefined) {
+            var spec = specs.find(function (spec) {
+                return spec.dictValue === selectedMaterial.spec;
+            });
+            $("#spec").val(spec.dictLabel);
+            $("#orderUnitPrice").val(selectedMaterial.unitPrice);
+            $("#basePrice").val(selectedMaterial.basePrice);
+            orderAmountResult();
+            baseAmountResult();
+        }
+    });
+
+    $("#orderNumber").on("input", orderAmountResult);
+    $("#orderUnitPrice").on("input", orderAmountResult);
+    $("#orderNumber").on("input", baseAmountResult);
+    $("#basePrice").on("input", baseAmountResult);
+    $("#taxRate").on("input", taxAmountResult);
+    $("#orderAmount").change(diffAmountResult);
+    $("#baseAmount").change(diffAmountResult);
+
+    //计算订单金额
+    function orderAmountResult() {
+        // 获取输入框1和输入框2的值
+        var value1 = parseFloat($("#orderNumber").val()) || 0; // 转换为浮点数，如果无法转换，则默认为 0
+        var value2 = parseFloat($("#orderUnitPrice").val()) || 0;
+        // 计算结果并赋值给结果输入框
+        var result = value1 * value2;
+        $("#orderAmount").val(result.toFixed(2));
+        diffAmountResult();
+    }
+
+    //计算底价金额
+    function baseAmountResult() {
+        // 获取输入框1和输入框2的值
+        var value1 = parseFloat($("#orderNumber").val()) || 0; // 转换为浮点数，如果无法转换，则默认为 0
+        var value2 = parseFloat($("#basePrice").val()) || 0;
+        // 计算结果并赋值给结果输入框
+        var result = value1 * value2;
+        $("#baseAmount").val(result.toFixed(2));
+        diffAmountResult();
+    }
+
+    //计算差额
+    function diffAmountResult() {
+        // 获取输入框1和输入框2的值
+        var value1 = parseFloat($("#orderAmount").val()) || 0; // 转换为浮点数，如果无法转换，则默认为 0
+        var value2 = parseFloat($("#baseAmount").val()) || 0;
+        // 计算结果并赋值给结果输入框
+        var result = value1 - value2;
+        $("#diffAmount").val(result.toFixed(2));
+        taxAmountResult();
+    }
+    //计算税额
+    function taxAmountResult() {
+        // 获取输入框1和输入框2的值
+        var value1 = parseFloat($("#diffAmount").val()) || 0; // 转换为浮点数，如果无法转换，则默认为 0
+        var value2 = parseFloat($("#taxRate").val()) || 0;
+        // 计算结果并赋值给结果输入框
+        var result = value1 * value2;
+        $("#taxAmount").val(result.toFixed(2));
+    }
+</script>
 </body>
 </html>
