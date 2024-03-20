@@ -158,7 +158,9 @@
                 {
                     field: 'taxRate',
                     title: '税率',
-                    visible: false
+                    formatter: function(value, row, index) {
+                        return $.table.formatPercent(value);
+                    }
                 },
                 {
                     field: 'taxAmount',

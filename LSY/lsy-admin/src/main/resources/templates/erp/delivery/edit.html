@@ -71,45 +71,51 @@
         </div>
         <div class="form-group">
             <label class="col-sm-3 control-label">订单单价：</label>
-            <div class="col-sm-3">
+            <div class="col-sm-2">
                 <input name="orderUnitPrice" th:field="*{orderUnitPrice}" class="form-control" type="text">
             </div>
-
+            <label class="col-sm-1 control-label">元</label>
             <label class="col-sm-2 control-label">订单金额：</label>
-            <div class="col-sm-3">
+            <div class="col-sm-2">
                 <input name="orderAmount" th:field="*{orderAmount}" class="form-control" type="text">
             </div>
+            <label class="col-sm-1 control-label">元</label>
         </div>
         <div class="form-group">
             <label class="col-sm-3 control-label">底价：</label>
-            <div class="col-sm-3">
+            <div class="col-sm-2">
                 <input name="basePrice" th:field="*{basePrice}" class="form-control" type="text">
             </div>
-
+            <label class="col-sm-1 control-label">元</label>
             <label class="col-sm-2 control-label">底价金额：</label>
-            <div class="col-sm-3">
+            <div class="col-sm-2">
                 <input name="baseAmount" th:field="*{baseAmount}" class="form-control" type="text">
             </div>
+            <label class="col-sm-1 control-label">元</label>
         </div>
         <div class="form-group">
             <label class="col-sm-3 control-label">税率：</label>
-            <div class="col-sm-3">
+            <div class="col-sm-2">
                 <input id="taxRate" name="taxRate" th:field="*{taxRate}" class="form-control" type="text">
             </div>
+            <label class="col-sm-1 control-label">%</label>
             <label class="col-sm-2 control-label">税金：</label>
-            <div class="col-sm-3">
+            <div class="col-sm-2">
                 <input id="taxAmount" name="taxAmount" th:field="*{taxAmount}" class="form-control" type="text">
             </div>
+            <label class="col-sm-1 control-label">元</label>
         </div>
         <div class="form-group">
             <label class="col-sm-3 control-label">差额：</label>
-            <div class="col-sm-3">
+            <div class="col-sm-2">
                 <input name="diffAmount" th:field="*{diffAmount}" class="form-control" type="text">
             </div>
+            <label class="col-sm-1 control-label">元</label>
             <label class="col-sm-2 control-label">返款金额：</label>
-            <div class="col-sm-3">
+            <div class="col-sm-2">
                 <input name="refundAmount" th:field="*{refundAmount}" class="form-control" type="text">
             </div>
+            <label class="col-sm-1 control-label">元</label>
         </div>
         <div class="form-group">
             <label class="col-sm-3 control-label">发票：</label>
@@ -279,7 +285,8 @@
     $("#taxRate").on("input", taxAmountResult);
     $("#orderAmount").change(diffAmountResult);
     $("#baseAmount").change(diffAmountResult);
-
+    $("#diffAmount").change(refundAmountResult);
+    $("#taxAmount").change(refundAmountResult);
     //计算订单金额
     function orderAmountResult() {
         // 获取输入框1和输入框2的值
@@ -311,15 +318,28 @@
         var result = value1 - value2;
         $("#diffAmount").val(result.toFixed(2));
         taxAmountResult();
+        refundAmountResult();
     }
+
     //计算税额
     function taxAmountResult() {
         // 获取输入框1和输入框2的值
         var value1 = parseFloat($("#diffAmount").val()) || 0; // 转换为浮点数，如果无法转换，则默认为 0
-        var value2 = parseFloat($("#taxRate").val()) || 0;
+        var value2 = parseFloat($("#taxRate").val())/100 || 0;
         // 计算结果并赋值给结果输入框
         var result = value1 * value2;
         $("#taxAmount").val(result.toFixed(2));
+        refundAmountResult();
+    }
+
+    //计算返款
+    function refundAmountResult() {
+        // 获取输入框1和输入框2的值
+        var value1 = parseFloat($("#diffAmount").val()) || 0; // 转换为浮点数，如果无法转换，则默认为 0
+        var value2 = parseFloat($("#taxAmount").val()) || 0;
+        // 计算结果并赋值给结果输入框
+        var result = value1 - value2;
+        $("#refundAmount").val(result.toFixed(2));
     }
 </script>
 </body>

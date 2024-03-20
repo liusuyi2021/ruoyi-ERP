@@ -65,7 +65,7 @@
         <div class="form-group">
             <label class="col-sm-3 control-label">订单数量：</label>
             <div class="col-sm-8">
-                <input id="orderNumber" name="orderNumber" class="form-control" type="text">
+                <input id="orderNumber" name="orderNumber" class="form-control" type="text" value="100">
             </div>
         </div>
         <div class="form-group">
@@ -73,47 +73,56 @@
             <div class="col-sm-2">
                 <input id="orderUnitPrice" name="orderUnitPrice" class="form-control" type="text">
             </div>
-
+            <label class="col-sm-1 control-label">元</label>
             <label class="col-sm-2 control-label">订单金额：</label>
             <div class="col-sm-2">
                 <input id="orderAmount" name="orderAmount" class="form-control" type="text">
             </div>
+            <label class="col-sm-1 control-label">元</label>
         </div>
         <div class="form-group">
             <label class="col-sm-3 control-label">底价：</label>
             <div class="col-sm-2">
                 <input id="basePrice" name="basePrice" class="form-control" type="text">
             </div>
+            <label class="col-sm-1 control-label">元</label>
             <label class="col-sm-2 control-label">底价金额：</label>
             <div class="col-sm-2">
                 <input id="baseAmount" name="baseAmount" class="form-control" type="text">
             </div>
+            <label class="col-sm-1 control-label">元</label>
         </div>
         <div class="form-group">
             <label class="col-sm-3 control-label">税率：</label>
             <div class="col-sm-2">
-                <input name="taxRate" class="form-control" type="text">
+                <input id="taxRate" name="taxRate" class="form-control" type="text" value="0.0">
             </div>
+            <label class="col-sm-1 control-label">%</label>
             <label class="col-sm-2 control-label">税金：</label>
             <div class="col-sm-2">
-                <input name="taxAmount" class="form-control" type="text">
+                <input id="taxAmount" name="taxAmount" class="form-control" type="text">
             </div>
+            <label class="col-sm-1 control-label">元</label>
         </div>
         <div class="form-group">
             <label class="col-sm-3 control-label">差额：</label>
             <div class="col-sm-2">
-                <input name="diffAmount" class="form-control" type="text">
+                <input id="diffAmount" name="diffAmount" class="form-control" type="text">
             </div>
+            <label class="col-sm-1 control-label">元</label>
             <label class="col-sm-2 control-label">返款金额：</label>
             <div class="col-sm-2">
-                <input name="refundAmount" class="form-control" type="text">
+                <input id="refundAmount" name="refundAmount" class="form-control" type="text">
             </div>
+            <label class="col-sm-1 control-label">元</label>
         </div>
         <div class="form-group">
             <label class="col-sm-3 control-label">发票：</label>
-            <div class="checkbox check-box">
-                <input type="hidden" name="invoiceProvide" value="1"> <!-- 隐藏的 input 元素，初始值为 0 -->
-                <input type="checkbox" name="invoiceProvide_checkbox" id="invoiceProvide" value="1" checked/>
+            <div class="col-sm-2">
+                <div class="checkbox check-box">
+                    <input type="hidden" name="invoiceProvide" value="1"> <!-- 隐藏的 input 元素，初始值为 0 -->
+                    <input type="checkbox" name="invoiceProvide_checkbox" id="invoiceProvide" value="1" checked/>
+                </div>
             </div>
         </div>
         <div class="form-group">
@@ -266,7 +275,6 @@
             $("#orderUnitPrice").val(selectedMaterial.unitPrice);
             $("#basePrice").val(selectedMaterial.basePrice);
         }
-        //$("input[name='invoiceProvide']").val(1);
     });
 
     $("#invoiceProvide").change(function () {
@@ -281,6 +289,11 @@
     $("#orderUnitPrice").on("input", orderAmountResult);
     $("#orderNumber").on("input", baseAmountResult);
     $("#basePrice").on("input", baseAmountResult);
+    $("#taxRate").on("input", taxAmountResult);
+    $("#orderAmount").change(diffAmountResult);
+    $("#baseAmount").change(diffAmountResult);
+    $("#diffAmount").change(refundAmountResult);
+    $("#taxAmount").change(refundAmountResult);
 
     //计算订单金额
     function orderAmountResult() {
@@ -290,6 +303,7 @@
         // 计算结果并赋值给结果输入框
         var result = value1 * value2;
         $("#orderAmount").val(result.toFixed(2));
+        diffAmountResult();
     }
 
     //计算底价金额
@@ -300,6 +314,40 @@
         // 计算结果并赋值给结果输入框
         var result = value1 * value2;
         $("#baseAmount").val(result.toFixed(2));
+        diffAmountResult();
+    }
+
+    //计算差额
+    function diffAmountResult() {
+        // 获取输入框1和输入框2的值
+        var value1 = parseFloat($("#orderAmount").val()) || 0; // 转换为浮点数，如果无法转换，则默认为 0
+        var value2 = parseFloat($("#baseAmount").val()) || 0;
+        // 计算结果并赋值给结果输入框
+        var result = value1 - value2;
+        $("#diffAmount").val(result.toFixed(2));
+        taxAmountResult();
+        refundAmountResult();
+    }
+
+    //计算税额
+    function taxAmountResult() {
+        // 获取输入框1和输入框2的值
+        var value1 = parseFloat($("#diffAmount").val()) || 0; // 转换为浮点数，如果无法转换，则默认为 0
+        var value2 = parseFloat($("#taxRate").val())/100 || 0;
+        // 计算结果并赋值给结果输入框
+        var result = value1 * value2;
+        $("#taxAmount").val(result.toFixed(2));
+        refundAmountResult();
+    }
+
+    //计算返款
+    function refundAmountResult() {
+        // 获取输入框1和输入框2的值
+        var value1 = parseFloat($("#diffAmount").val()) || 0; // 转换为浮点数，如果无法转换，则默认为 0
+        var value2 = parseFloat($("#taxAmount").val()) || 0;
+        // 计算结果并赋值给结果输入框
+        var result = value1 - value2;
+        $("#refundAmount").val(result.toFixed(2));
     }
 
 </script>

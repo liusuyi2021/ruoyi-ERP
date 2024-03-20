@@ -562,6 +562,9 @@ var table = {
                     });
                 return actions.join('');
             },
+            formatPercent: function(value) {
+               return value + '%';
+            },
             // 回显数据字典（字符串数组）
             selectDictLabels: function(datas, value, separator) {
                 if ($.common.isEmpty(datas) || $.common.isEmpty(value)) {

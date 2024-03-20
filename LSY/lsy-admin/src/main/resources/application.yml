@@ -140,3 +140,6 @@ xss:
 swagger:
   # 是否开启swagger
   enabled: true
+# thymeleaf配置
+thymeleaf:
+  prefix: classpath:/templates
