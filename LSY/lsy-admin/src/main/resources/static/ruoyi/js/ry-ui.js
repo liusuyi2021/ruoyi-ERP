@@ -562,6 +562,17 @@ var table = {
                     });
                 return actions.join('');
             },
+            selectCustomerCompany: function(datas, value) {
+                var actions = [];
+                $.each(datas,
+                    function(index, customer) {
+                        if (customer.id == ('' + value)) {
+                            actions.push($.common.sprintf("<span class='%s'>%s</span>", "", customer.company));
+                            return false;
+                        }
+                    });
+                return actions.join('');
+            },
             formatPercent: function(value) {
                return value + '%';
             },

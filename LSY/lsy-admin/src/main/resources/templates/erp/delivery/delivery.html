@@ -69,6 +69,7 @@
         var removeFlag = [[${@permission.hasPermi('erp:delivery:remove')}]];
         var prefix = ctx + "erp/delivery";
         var materials = [[${materials}]];
+        var customers = [[${customers}]];
         var specs = [[${@dict.getType('m_spec')}]];
         var provideDics = [[${@dict.getType('invoice_provide')}]];
         $(function() {
@@ -110,7 +111,10 @@
                 },
                 {
                     field: 'customer',
-                    title: '客户名称'
+                    title: '客户名称',
+                    formatter: function(value, row, index) {
+                        return $.table.selectCustomerCompany(customers, value);
+                    }
                 },
                 {
                     field: 'paymentDate',

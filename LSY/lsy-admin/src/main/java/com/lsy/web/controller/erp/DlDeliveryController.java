@@ -3,6 +3,8 @@ package com.lsy.web.controller.erp;
 import java.util.List;
 
 import com.lsy.common.utils.ShiroUtils;
+import com.lsy.erp.customer.domain.DlCustomer;
+import com.lsy.erp.customer.service.IDlCustomerService;
 import com.lsy.erp.materail.domain.DlMaterial;
 import com.lsy.erp.materail.service.IDlMaterialService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -39,6 +41,8 @@ public class DlDeliveryController extends BaseController
     private IDlMaterialService dlMaterialService;
     @Autowired
     private IDlDeliveryService dlDeliveryService;
+    @Autowired
+    private IDlCustomerService dlCustomerService;
 
     @RequiresPermissions("erp:delivery:view")
     @GetMapping()
@@ -46,6 +50,8 @@ public class DlDeliveryController extends BaseController
     {
         List<DlMaterial> dlMaterials = dlMaterialService.selectDlMaterialList(new DlMaterial());
         mmap.put("materials", dlMaterials);
+        List<DlCustomer> dlCustomers = dlCustomerService.selectDlCustomerList(new DlCustomer());
+        mmap.put("customers", dlCustomers);
         return prefix + "/delivery";
     }
 
@@ -84,6 +90,8 @@ public class DlDeliveryController extends BaseController
     {
         List<DlMaterial> dlMaterials = dlMaterialService.selectDlMaterialList(new DlMaterial());
         mmap.put("materials", dlMaterials);
+        List<DlCustomer> dlCustomers = dlCustomerService.selectDlCustomerList(new DlCustomer());
+        mmap.put("customers", dlCustomers);
         return prefix + "/add";
     }
 
@@ -108,6 +116,10 @@ public class DlDeliveryController extends BaseController
     {
         DlDelivery dlDelivery = dlDeliveryService.selectDlDeliveryById(id);
         mmap.put("dlDelivery", dlDelivery);
+        List<DlCustomer> dlCustomers = dlCustomerService.selectDlCustomerList(new DlCustomer());
+        mmap.put("customers", dlCustomers);
+        List<DlMaterial> dlMaterials = dlMaterialService.selectDlMaterialList(new DlMaterial());
+        mmap.put("materials", dlMaterials);
         return prefix + "/edit";
     }
 

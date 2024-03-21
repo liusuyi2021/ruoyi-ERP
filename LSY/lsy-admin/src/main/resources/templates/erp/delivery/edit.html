@@ -20,6 +20,19 @@
             </div>
         </div>
         <div class="form-group">
+            <label class="col-sm-3 control-label">物流单号：</label>
+            <div class="col-sm-3">
+                <input name="trackingNumber" th:field="*{trackingNumber}" class="form-control" type="text">
+            </div>
+            <label class="col-sm-2 control-label">客户名称：</label>
+            <div class="col-sm-3">
+                <select id="customer" name="customer" class="form-control" th:field="*{customer}">
+                    <option th:each="option:${customers}" th:value="${option.id}"
+                            th:text="${option.company}" ></option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
             <label class="col-sm-3 control-label">代理人：</label>
             <div class="col-sm-3">
                 <input name="agenter" th:field="*{agenter}" class="form-control" type="text">
@@ -27,17 +40,6 @@
             <label class="col-sm-2 control-label">收货人：</label>
             <div class="col-sm-3">
                 <input name="receiver" th:field="*{receiver}" class="form-control" type="text">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-3 control-label">物流单号：</label>
-            <div class="col-sm-3">
-                <input name="trackingNumber" th:field="*{trackingNumber}" class="form-control" type="text">
-            </div>
-
-            <label class="col-sm-2 control-label">客户名称：</label>
-            <div class="col-sm-3">
-                <input name="customer" th:field="*{customer}" class="form-control" type="text">
             </div>
         </div>
         <div class="form-group">
@@ -53,9 +55,9 @@
         <div class="form-group">
             <label class="col-sm-3 control-label">物料名称：</label>
             <div class="col-sm-3">
-                <select id="material" name="material" class="form-control m-b">
-                    <option th:each="material:${materials}" th:value="${material.id}"
-                            th:text="${material.name}"></option>
+                <select id="material" name="material" class="form-control" th:field="*{material}">
+                    <option th:each="option:${materials}" th:value="${option.id}"
+                            th:text="${option.name}"></option>
                 </select>
             </div>
             <label class="col-sm-2 control-label">规格：</label>
@@ -161,23 +163,26 @@
         </div>
         <div class="form-group">
             <label class="col-sm-3 control-label">批号：</label>
-            <div class="col-sm-8">
+            <div class="col-sm-3">
                 <input name="batchNumber" th:field="*{batchNumber}" class="form-control" type="text">
+            </div>
+
+            <label class="col-sm-2 control-label">箱号：</label>
+            <div class="col-sm-3">
+                <input name="boxNumber" th:field="*{boxNumber}" class="form-control" type="text">
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-3 control-label">生产日期：</label>
-            <div class="col-sm-8">
+            <div class="col-sm-3">
                 <div class="input-group date">
                     <input name="productionDate" th:value="${#dates.format(dlDelivery.productionDate, 'yyyy-MM-dd')}"
                            class="form-control" placeholder="yyyy-MM-dd" type="text">
                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                 </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-3 control-label">有效期：</label>
-            <div class="col-sm-8">
+            <label class="col-sm-2 control-label">有效期：</label>
+            <div class="col-sm-3">
                 <div class="input-group date">
                     <input name="expirationDate" th:value="${#dates.format(dlDelivery.expirationDate, 'yyyy-MM-dd')}"
                            class="form-control" placeholder="yyyy-MM-dd" type="text">
@@ -185,12 +190,7 @@
                 </div>
             </div>
         </div>
-        <div class="form-group">
-            <label class="col-sm-3 control-label">箱号：</label>
-            <div class="col-sm-8">
-                <input name="boxNumber" th:field="*{boxNumber}" class="form-control" type="text">
-            </div>
-        </div>
+
         <div class="form-group">
             <label class="col-sm-3 control-label">备注：</label>
             <div class="col-sm-8">
@@ -259,8 +259,8 @@
 
     // 获取物料选择框和规格输入框的元素
     var materials = [[${materials}]];
+    var customers = [[${customers}]];
     var specs = [[${@dict.getType('m_spec')}]];
-
     // 监听物料选择框的变化事件
     $("#material").change(function () {
         var selectedMaterial = materials.find(function (material) {
@@ -287,6 +287,8 @@
     $("#baseAmount").change(diffAmountResult);
     $("#diffAmount").change(refundAmountResult);
     $("#taxAmount").change(refundAmountResult);
+    $("#customer").change(selectedCustomer);
+    $("#material").change(selectedMaterial);
     //计算订单金额
     function orderAmountResult() {
         // 获取输入框1和输入框2的值
@@ -340,6 +342,31 @@
         // 计算结果并赋值给结果输入框
         var result = value1 - value2;
         $("#refundAmount").val(result.toFixed(2));
+    }
+
+    // 监听客户选择事件改变代理人和收货人
+    function selectedCustomer() {
+        var selectedCustomer = customers.find(function (customer) {
+            return customer.id == $("#customer").val();
+        });
+        $("#agenter").val(selectedCustomer.agenter);
+        $("#receiver").val(selectedCustomer.receiver);
+    }
+    // 监听物料选择框的变化事件
+    function selectedMaterial() {
+        var selectedMaterial = materials.find(function (material) {
+            return material.id == $("#material").val();
+        });
+        if (selectedMaterial !== undefined && selectedMaterial.spec !== undefined) {
+            var spec = specs.find(function (spec) {
+                return spec.dictValue === selectedMaterial.spec;
+            });
+            $("#spec").val(spec.dictLabel);
+            $("#orderUnitPrice").val(selectedMaterial.unitPrice);
+            $("#basePrice").val(selectedMaterial.basePrice);
+            orderAmountResult();
+            baseAmountResult();
+        }
     }
 </script>
 </body>

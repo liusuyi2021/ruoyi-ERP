@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lsy.erp.customer.mapper.DlCustomerMapper">
+    
+    <resultMap type="DlCustomer" id="DlCustomerResult">
+        <result property="id"    column="id"    />
+        <result property="agenter"    column="agenter"    />
+        <result property="receiver"    column="receiver"    />
+        <result property="company"    column="company"    />
+    </resultMap>
+
+    <sql id="selectDlCustomerVo">
+        select id, agenter, receiver, company from dl_customer
+    </sql>
+
+    <select id="selectDlCustomerList" parameterType="DlCustomer" resultMap="DlCustomerResult">
+        <include refid="selectDlCustomerVo"/>
+        <where>  
+            <if test="agenter != null  and agenter != ''"> and agenter = #{agenter}</if>
+            <if test="receiver != null  and receiver != ''"> and receiver = #{receiver}</if>
+            <if test="company != null  and company != ''"> and company = #{company}</if>
+        </where>
+    </select>
+    
+    <select id="selectDlCustomerById" parameterType="Long" resultMap="DlCustomerResult">
+        <include refid="selectDlCustomerVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertDlCustomer" parameterType="DlCustomer">
+        insert into dl_customer
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="agenter != null">agenter,</if>
+            <if test="receiver != null">receiver,</if>
+            <if test="company != null">company,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="agenter != null">#{agenter},</if>
+            <if test="receiver != null">#{receiver},</if>
+            <if test="company != null">#{company},</if>
+         </trim>
+    </insert>
+
+    <update id="updateDlCustomer" parameterType="DlCustomer">
+        update dl_customer
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="agenter != null">agenter = #{agenter},</if>
+            <if test="receiver != null">receiver = #{receiver},</if>
+            <if test="company != null">company = #{company},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteDlCustomerById" parameterType="Long">
+        delete from dl_customer where id = #{id}
+    </delete>
+
+    <delete id="deleteDlCustomerByIds" parameterType="String">
+        delete from dl_customer where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>
