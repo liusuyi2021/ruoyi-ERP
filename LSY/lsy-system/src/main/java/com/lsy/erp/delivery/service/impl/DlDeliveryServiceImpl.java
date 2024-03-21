@@ -1,6 +1,7 @@
 package com.lsy.erp.delivery.service.impl;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.lsy.erp.delivery.mapper.DlDeliveryMapper;
@@ -10,19 +11,19 @@ import com.lsy.common.core.text.Convert;
 
 /**
  * 发货管理Service业务层处理
- * 
+ *
  * @author ruoyi
  * @date 2024-03-19
  */
 @Service
-public class DlDeliveryServiceImpl implements IDlDeliveryService 
+public class DlDeliveryServiceImpl implements IDlDeliveryService
 {
     @Autowired
     private DlDeliveryMapper dlDeliveryMapper;
 
     /**
      * 查询发货管理
-     * 
+     *
      * @param id 发货管理主键
      * @return 发货管理
      */
@@ -34,7 +35,7 @@ public class DlDeliveryServiceImpl implements IDlDeliveryService
 
     /**
      * 查询发货管理列表
-     * 
+     *
      * @param dlDelivery 发货管理
      * @return 发货管理
      */
@@ -44,9 +45,14 @@ public class DlDeliveryServiceImpl implements IDlDeliveryService
         return dlDeliveryMapper.selectDlDeliveryList(dlDelivery);
     }
 
+    @Override
+    public List<Integer> selectDlDeliveryCountCurrentYear() {
+        return dlDeliveryMapper.selectDlDeliveryCountCurrentYear();
+    }
+
     /**
      * 新增发货管理
-     * 
+     *
      * @param dlDelivery 发货管理
      * @return 结果
      */
@@ -58,7 +64,7 @@ public class DlDeliveryServiceImpl implements IDlDeliveryService
 
     /**
      * 修改发货管理
-     * 
+     *
      * @param dlDelivery 发货管理
      * @return 结果
      */
@@ -70,7 +76,7 @@ public class DlDeliveryServiceImpl implements IDlDeliveryService
 
     /**
      * 批量删除发货管理
-     * 
+     *
      * @param ids 需要删除的发货管理主键
      * @return 结果
      */
@@ -82,7 +88,7 @@ public class DlDeliveryServiceImpl implements IDlDeliveryService
 
     /**
      * 删除发货管理信息
-     * 
+     *
      * @param id 发货管理主键
      * @return 结果
      */

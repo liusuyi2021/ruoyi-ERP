@@ -6,7 +6,9 @@
 <body class="gray-bg">
 	<div class="row  border-bottom white-bg dashboard-header">
         <div class="col-sm-12">
-            <p>ECharts开源来自百度商业前端数据可视化团队，基于html5 Canvas，是一个纯Javascript图表库，提供直观，生动，可交互，可个性化定制的数据可视化图表。创新的拖拽重计算、数据视图、值域漫游等特性大大增强了用户体验，赋予了用户对数据进行挖掘、整合的能力。 <a href="https://echarts.apache.org/handbook/zh/get-started/" target="_blank">了解更多</a>
+            <p>ECharts开源来自百度商业前端数据可视化团队，基于html5
+                Canvas，是一个纯Javascript图表库，提供直观，生动，可交互，可个性化定制的数据可视化图表。创新的拖拽重计算、数据视图、值域漫游等特性大大增强了用户体验，赋予了用户对数据进行挖掘、整合的能力。 <a
+                        href="https://echarts.apache.org/handbook/zh/get-started/" target="_blank">了解更多</a>
             </p>
             <p>ECharts官网：<a href="https://echarts.apache.org/" target="_blank">https://echarts.apache.org/</a>
             </p>
@@ -338,7 +340,7 @@
 	        };
 	        lineChart.setOption(lineoption);
 	        $(window).resize(lineChart.resize);
-	
+
 	        var barChart = echarts.init(document.getElementById("echarts-bar-chart"));
 	        var baroption = {
 	            title : {
@@ -403,9 +405,9 @@
 	            ]
 	        };
 	        barChart.setOption(baroption);
-	
+
 	        window.onresize = barChart.resize;
-	
+
 	        var scatterChart = echarts.init(document.getElementById("echarts-scatter-chart"));
 	        var scatteroption = {
 	            title : {
@@ -620,8 +622,8 @@
 	        };
 	        scatterChart.setOption(scatteroption);
 	        $(window).resize(scatterChart.resize);
-	
-	
+
+
 	        var kChart = echarts.init(document.getElementById("echarts-k-chart"));
 	        var koption = {
 	            title : {
@@ -783,7 +785,7 @@
 	        };
 	        kChart.setOption(koption);
 	        $(window).resize(kChart.resize);
-	
+
 	        var pieChart = echarts.init(document.getElementById("echarts-pie-chart"));
 	        var pieoption = {
 	            title : {
@@ -819,7 +821,7 @@
 	        };
 	        pieChart.setOption(pieoption);
 	        $(window).resize(pieChart.resize);
-	
+
 	        var radarChart = echarts.init(document.getElementById("echarts-radar-chart"));
 	        var radaroption = {
 	            title : {
@@ -865,10 +867,10 @@
 	                }
 	            ]
 	        };
-	
+
 	        radarChart.setOption(radaroption);
 	        $(window).resize(radarChart.resize);
-	
+
 	        var mapChart = echarts.init(document.getElementById("echarts-map-chart"));
 	        var mapoption = {
 	            title : {
@@ -1010,7 +1012,7 @@
 	        };
 	        mapChart.setOption(mapoption);
 	        $(window).resize(mapChart.resize);
-	
+
 	        var gaugeChart = echarts.init(document.getElementById("echarts-gauge-chart"));
 	        var gaugeoption = {
 	            tooltip : {
@@ -1203,7 +1205,7 @@
 	        };
 	        gaugeChart.setOption(gaugeoption);
 	        $(window).resize(gaugeChart.resize);
-	
+
 	        var funnelChart = echarts.init(document.getElementById("echarts-funnel-chart"));
 	        var funneloption = {
 	            title : {
@@ -1254,10 +1256,10 @@
 	                }
 	            ]
 	        };
-	
+
 	        funnelChart.setOption(funneloption);
 	        $(window).resize(funnelChart.resize);
-	
+
 	    });
     </script>
 </body>

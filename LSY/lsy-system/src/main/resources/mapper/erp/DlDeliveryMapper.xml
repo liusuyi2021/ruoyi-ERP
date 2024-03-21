@@ -70,7 +70,41 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="boxNumber != null  and boxNumber != ''"> and box_number = #{boxNumber}</if>
         </where>
     </select>
-
+    <select id="selectDlDeliveryCountCurrentYear"  resultType="Integer">
+        SELECT
+    IFNULL(SUM(dl_delivery_count.count), 0) AS count
+        FROM
+            (
+            SELECT 1 AS month
+            UNION SELECT 2
+            UNION SELECT 3
+            UNION SELECT 4
+            UNION SELECT 5
+            UNION SELECT 6
+            UNION SELECT 7
+            UNION SELECT 8
+            UNION SELECT 9
+            UNION SELECT 10
+            UNION SELECT 11
+            UNION SELECT 12
+            ) AS MONTH_TABLE
+            LEFT JOIN (
+            SELECT
+            EXTRACT(MONTH FROM payment_date) AS month,
+            COUNT(*) AS count
+            FROM
+            dl_delivery
+            WHERE
+            YEAR(payment_date) = YEAR(CURDATE())
+            GROUP BY
+            EXTRACT(YEAR FROM payment_date),
+            EXTRACT(MONTH FROM payment_date)
+            ) AS dl_delivery_count ON MONTH_TABLE.month = dl_delivery_count.month
+        GROUP BY
+            MONTH_TABLE.month
+        ORDER BY
+            MONTH_TABLE.month;
+    </select>
     <select id="selectDlDeliveryById" parameterType="Long" resultMap="DlDeliveryResult">
         <include refid="selectDlDeliveryVo"/>
         where id = #{id}
