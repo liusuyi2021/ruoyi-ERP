@@ -28,7 +28,7 @@
             <div class="col-sm-3">
                 <select id="customer" name="customer" class="form-control" th:field="*{customer}">
                     <option th:each="option:${customers}" th:value="${option.id}"
-                            th:text="${option.company}" ></option>
+                            th:text="${option.company}"></option>
                 </select>
             </div>
         </div>
@@ -266,16 +266,11 @@
         var selectedMaterial = materials.find(function (material) {
             return material.id == $("#material").val();
         });
-        if (selectedMaterial !== undefined && selectedMaterial.spec !== undefined) {
-            var spec = specs.find(function (spec) {
-                return spec.dictValue === selectedMaterial.spec;
-            });
-            $("#spec").val(spec.dictLabel);
-            $("#orderUnitPrice").val(selectedMaterial.unitPrice);
-            $("#basePrice").val(selectedMaterial.basePrice);
-            orderAmountResult();
-            baseAmountResult();
-        }
+        $("#spec").val(selectedMaterial.spec);
+        $("#orderUnitPrice").val(selectedMaterial.unitPrice);
+        $("#basePrice").val(selectedMaterial.basePrice);
+        orderAmountResult();
+        baseAmountResult();
     });
 
     $("#orderNumber").on("input", orderAmountResult);
@@ -289,6 +284,7 @@
     $("#taxAmount").change(refundAmountResult);
     $("#customer").change(selectedCustomer);
     $("#material").change(selectedMaterial);
+
     //计算订单金额
     function orderAmountResult() {
         // 获取输入框1和输入框2的值
@@ -327,7 +323,7 @@
     function taxAmountResult() {
         // 获取输入框1和输入框2的值
         var value1 = parseFloat($("#diffAmount").val()) || 0; // 转换为浮点数，如果无法转换，则默认为 0
-        var value2 = parseFloat($("#taxRate").val())/100 || 0;
+        var value2 = parseFloat($("#taxRate").val()) / 100 || 0;
         // 计算结果并赋值给结果输入框
         var result = value1 * value2;
         $("#taxAmount").val(result.toFixed(2));
@@ -352,6 +348,7 @@
         $("#agenter").val(selectedCustomer.agenter);
         $("#receiver").val(selectedCustomer.receiver);
     }
+
     // 监听物料选择框的变化事件
     function selectedMaterial() {
         var selectedMaterial = materials.find(function (material) {

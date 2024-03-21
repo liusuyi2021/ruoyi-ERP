@@ -269,6 +269,7 @@
     $("#taxAmount").change(refundAmountResult);
     $("#customer").change(selectedCustomer);
     $("#material").change(selectedMaterial);
+
     //计算订单金额
     function orderAmountResult() {
         // 获取输入框1和输入框2的值
@@ -332,21 +333,17 @@
         $("#agenter").val(selectedCustomer.agenter);
         $("#receiver").val(selectedCustomer.receiver);
     }
+
     // 监听物料选择框的变化事件
     function selectedMaterial() {
         var selectedMaterial = materials.find(function (material) {
             return material.id == $("#material").val();
         });
-        if (selectedMaterial !== undefined && selectedMaterial.spec !== undefined) {
-            var spec = specs.find(function (spec) {
-                return spec.dictValue === selectedMaterial.spec;
-            });
-            $("#spec").val(spec.dictLabel);
-            $("#orderUnitPrice").val(selectedMaterial.unitPrice);
-            $("#basePrice").val(selectedMaterial.basePrice);
-            orderAmountResult();
-            baseAmountResult();
-        }
+        $("#spec").val(selectedMaterial.spec);
+        $("#orderUnitPrice").val(selectedMaterial.unitPrice);
+        $("#basePrice").val(selectedMaterial.basePrice);
+        orderAmountResult();
+        baseAmountResult();
     }
 </script>
 </body>
