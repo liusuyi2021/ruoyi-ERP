@@ -1,5 +1,7 @@
 package com.lsy.web.controller.erp;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.List;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,6 +98,7 @@ public class DlCustomerController extends BaseController
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") Long id, ModelMap mmap)
     {
+
         DlCustomer dlCustomer = dlCustomerService.selectDlCustomerById(id);
         mmap.put("dlCustomer", dlCustomer);
         return prefix + "/edit";

@@ -95,7 +95,7 @@ public class DlDelivery extends BaseEntity
     private BigDecimal refundAmount;
 
     /** 是否提供发票 */
-    @Excel(name = "是否提供发票")
+    @Excel(name = "是否提供发票", readConverterExp = "true=是,false=否")
     private Boolean invoiceProvide;
 
     /** 返款申请日期 */

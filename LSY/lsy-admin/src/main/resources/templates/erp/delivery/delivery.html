@@ -54,7 +54,7 @@
                 <a class="btn btn-danger multiple disabled" onclick="$.operate.removeAll()" shiro:hasPermission="erp:delivery:remove">
                     <i class="fa fa-remove"></i> 删除
                 </a>
-                <a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="erp:delivery:export">
+                <a class="btn btn-warning" onclick="exportSelected()" shiro:hasPermission="erp:delivery:export">
                     <i class="fa fa-download"></i> 导出
                 </a>
             </div>
@@ -234,6 +234,26 @@
             };
             $.table.init(options);
         });
+
+        // 导出数据
+        function exportSelected() {
+            var ids = $.table.selectColumns("id");
+            var dataParam = $("#export-form").serializeArray();
+            var tipMsg = "确定导出所有数据吗？";
+            if($.common.isNotEmpty(ids)){
+                tipMsg = "确定导出勾选" + ids.length + "条数据吗？";
+                dataParam.push({ "name": "ids", "value": ids });
+            }
+            $.modal.confirm(tipMsg, function() {
+                $.post(prefix + "/exportData", dataParam, function(result) {
+                    if (result.code == web_status.SUCCESS) {
+                        window.location.href = ctx + "common/download?fileName=" + encodeURI(result.msg) + "&delete=" + true;
+                    } else {
+                        $.modal.alertError(result.msg);
+                    }
+                });
+            });
+        }
     </script>
 </body>
 </html>

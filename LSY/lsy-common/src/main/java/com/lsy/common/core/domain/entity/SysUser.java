@@ -1,5 +1,6 @@
 package com.lsy.common.core.domain.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.validation.constraints.*;
@@ -15,7 +16,7 @@ import com.lsy.common.xss.Xss;
 
 /**
  * 用户对象 sys_user
- * 
+ *
  * @author ruoyi
  */
 public class SysUser extends BaseEntity
